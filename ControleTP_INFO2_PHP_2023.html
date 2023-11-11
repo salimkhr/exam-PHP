@@ -107,8 +107,9 @@
                         <dt>Quantité :</dt>
                         <dd>un champ de saisie autorisant uniquement les nombres</dd>
                         <dt>Unité :</dt>
-                        <dd>une liste avec les options 'Gramme', 'Litre', 'Tranche', 'c. à soupe' et une option vide sélectionnée par défaut</dd>
+                        <dd>une liste avec les options "feuilles","gousses","grammes","tasse" et une option vide sélectionnée par défaut</dd>
                     </dl>
+                    <p>afin d'avoir un meilleur visuel, vous ajouter au <code>input</code> et <code>select</code> la class <em>"form-control"</em> et la class <em>"form-label"</em> au <code>label</code>
                 </div>
                 <p>
                     On ajoutera enfin deux boutons <strong>Valider</strong> et <strong>Annuler</strong> qui permettront respectivement de soumettre ou de remettre à zéro les champs du formulaire.
@@ -117,10 +118,9 @@
                     <strong>1/</strong> Créez une classe PHP <strong>Ingredient</strong>, semblable à la classe Client vue en TP, dans le fichier <em>ingredient.inc.php</em> qui possède les attributs suivants décrits précédemment :
                     <pre>
                         <code>
-                            string name
-                            int $quantity
-                            ?string $unit
-                            int $idPizza
+string $name
+int $quantity
+?string $unit
                         </code>
                     </pre>
                     <em>Ces attributs permettront de stocker les valeurs des champs du formulaire sous forme d'objets, instances de cette classe, après validation du formulaire.</em>
@@ -141,7 +141,7 @@
                     <strong>4/</strong> Modifier le script <em>editIngredient.php</em> pour faire en sorte que, une fois les données du formulaire de saisie validées, il donne en réponse une page avec le descriptif de l'ingrédient qui vient juste d'être saisi.
                 </p>
                 <p>
-                    Vous compléterez pour se faire la méthode <code>_toString()</code> de la classe <code>Ingredient</code> afin qu'elle renvoie une seule chaîne de caractères en code HTML qui affiche l'ingrédient tout juste créé. Ainsi on affichera :
+                    Vous compléterez pour se faire la méthode <code>__toString()</code> de la classe <code>Ingredient</code> afin qu'elle renvoie une seule chaîne de caractères en code HTML qui affiche l'ingrédient tout juste créé. Ainsi on affichera :
                 <ul>
                     <li>Le nom de l'ingrédient dans une balise <code>h3</code></li>
                     <li>La quantité et l'unité concaténée, dans une balise <code>h4</code>.</li>
@@ -155,11 +155,11 @@
             <article class="col-12">
                 <h2>Partie B : <span class="h3">Affichage des pizzas (6 points).</span></h2>
                 <p>
-                    Dans cette partie, il s'agit de créer le script consultPizza.php qui affiche la liste complète des ingrédients créés pendant le temps d'une session utilisateur.
+                    Dans cette partie, il s'agit de Modifier le script consultPizza.php qui affiche la liste complète des ingrédients créés pendant le temps d'une session utilisateur.
                 <p>
-                    Ce script doit afficher tous les ingrédients créés jusque là, verticalement comme dans la copie d'écran ci-dessous (qui comporte deux ingrédients). Il n'y a pas de mise en forme supplémentaire à prévoir au-delà de ce qui a été prévu dans la méthode _toString() de la classe <code>Ingredient</code> vue précédemment pour l'affichage d'un message.
+                    Ce script doit afficher tous les ingrédients créés jusque là.
                     En revanche, la question principale ici est de pouvoir stocker successivement les objets <code>ingrédient</code> créés via le formulaire géré par le script <em>editIngredient.php</em> sans utiliser de base de données pour l'instant. Pour réaliser cela, on va utiliser les sessions qui permettent de conserver des informations entre des pages successives de script.
-                    La procédure est la suivante : dans le script <em>editIngredient.php</em>, on ouvre une session ou on récupère la session courante pour y stocker un tableau d'objets <code>'listeIngrediant'</code> comportant tous les objets <code>Ingredient</code> créés jusqu'ici durant la session.
+                    La procédure est la suivante : dans le script <em>editIngredient.php</em>, on ouvre une session ou on récupère la session courante pour y stocker un tableau tous les objets <code>Ingredient</code> créés jusqu'ici durant la session.
                 </p>
 
                 <p>
@@ -170,34 +170,34 @@
                     pour pouvoir sérialiser et désérialiser notre objet, nous allons rajouter le code suivant a notre class <code>Ingrediant</code>
                 <pre>
                     <code>
-                        public function __serialize(): array
-                        {
-                        return [
-                        'name' => $this->name,
-                        'quantity' => $this->quantity,
-                        'unit' => $this->unit,
-                        'idPizza' => $this->idPizza,
-                        ];
-                        }
+public function __serialize(): array
+{
+  return [
+    'name' => $this->name,
+    'quantity' => $this->quantity,
+    'unit' => $this->unit,
+  ];
+}
 
-                        public function __unserialize(array $data): void
-                        {
-                        $this->name = $data['name'];
-                        $this->quantity = $data['quantity'];
-                        $this->unit = $data['unit'];
-                        $this->idPizza = $data['idPizza'];
-                        }
+public function __unserialize(array $data): void
+{
+  $this->name = $data['name'];
+  $this->quantity = $data['quantity'];
+  $this->unit = $data['unit'];
+}
                     </code>
                 </pre>
                 </p>
 
                 <p>
-                    <strong>1/</strong> Compléter le script <em>editIngredient.php</em> de façon à pouvoir stocker tous les objets de type <code>Ingrediant</code> créés dans la session courante, puis edité le script <em>consultPizza.php</em> qui permet de visualiser les messages stockés dans la session courante comme décrit précédemment.
-                    Ci-dessous une idée de la mise en page à obtenir lorsque l'on clique sur l'item de menu Afficher (donc on appelle le fichier <em>consultPizza.php</em>):
+                    <strong>1/</strong> Compléter le script <em>editIngredient.php</em> de façon à pouvoir stocker tous les objets de type <code>Ingrediant</code> créés dans la session courante. la clef de la session sera 'ingredient'
                 </p>
 
                 <p>
-                    <strong>2/</strong> Compléter le menu par un dernier item Réinitialiser qui fait appel au fichier bye.php (fichier déjà employé en TP) qui permet de réinitialiser la session, puis de réafficher le script editIngredient.php.
+                    <strong>2/</strong> Modifier le script <em>consultPizza.php</em> qui permet de visualiser les pizzas aves les ingredients stockés dans la session courante comme décrit précédemment.
+                    Le script <em>consultPizza.php</em> crée une instance de l'objet <code>Pizza</code> possedant la méthode <code>addIngredient()</code>
+                    utiliser cette méthode pour ajouter les ingrediants présent en session a la pizza.
+
                 </p>
             </article>
         </section>
