@@ -72,16 +72,15 @@
                             La notation prendra en compte le respect du nom des classes et des fonctions ainsi que le respect des structure vu en cours.</p>
                         <em>Le css ne sera pas pris en compte dans la notation</em>
                     </div>
-                    </p>
                 </div>
             </article>
             <article class="col-12">
                 <span class="h4">Résumé du sujet : </span>
                 <p>L'objectif de cet exercice est de mettre en place un système de gestion des ingrédients pour des recettes de pizza à l'aide d'un formulaire de saisie.</p>
-                <p>Dans la partie A, les ingrédients (un ou plusieurs) seront gérés et stockés sous forme d'objets instances d'une classe Ingrédient définie dans le fichier <em>ingredient.inc.php</em>. Cette classe sera responsable de stocker toutes les informations liées à un ingrédient, telles que son nom, sa quantité, et d'autres caractéristiques.</p>
+                <p>Dans la partie A, les ingrédients (un ou plusieurs) seront gérés et stockés sous forme d'objets instances d'une classe <strong>Ingredient</strong> définie dans le fichier <em>ingredient.inc.php</em>. Cette classe sera responsable de stocker toutes les informations liées à un ingrédient, telles que son nom, sa quantité, et d'autres caractéristiques.</p>
                 <p>La partie B du projet consiste à développer des fonctionnalités pour créer des recettes de pizza en utilisant les ingrédients gérés dans la partie A. Les étudiants devront créer une page d'édition <em>editPizza.php</em> pour permettre la création de nouvelles recettes de pizza en ajoutant les ingrédients appropriés</p>
                 <p>Enfin, dans la partie C, les étudiants devront intégrer une base de données PostgreSQL pour stocker de manière permanente les recettes de pizza ainsi que les détails des ingrédients. Cette base de données permettra une gestion plus efficace des recettes de pizza et de leurs composants.</p>
-                <article class="col-12">
+                <div class="col-12">
                     <p>
                         Les différentes pages à réaliser comporteront la structure déjà vue en TP en trois parties
                         (fonctions PHP) : <code>entete()</code>, <code>contenu()</code>, et <code>pied()</code>. Les éléments d'entête
@@ -89,6 +88,8 @@
                         dans le fichier de fonctions auxiliaires <em>fctAux.inc.php </em>fourni dans cette archive :
                         <a href="src.zip">scr.zip</a> (qui comporte aussi l'image du bandeau et la feuille de style <strong>site.css</strong>).
                     </p>
+                </div>
+            </article>
         </section>
 
         <!-- Partie A -->
@@ -109,43 +110,43 @@
                         <dd>une liste avec les options 'Gramme', 'Litre', 'Tranche', 'c. à soupe' et une option vide sélectionnée par défaut</dd>
                     </dl>
                 </div>
-                </p>
                 <p>
                     On ajoutera enfin deux boutons <strong>Valider</strong> et <strong>Annuler</strong> qui permettront respectivement de soumettre ou de remettre à zéro les champs du formulaire.
                 </p>
                 <p>
-                    <strong>1/</strong> Créez une classe PHP Ingrédient, semblable à la classe Client vue en TP, dans le fichier <em>ingredient.inc.php</em> qui possède les attributs suivants décrits précédemment :
+                    <strong>1/</strong> Créez une classe PHP <strong>Ingredient</strong>, semblable à la classe Client vue en TP, dans le fichier <em>ingredient.inc.php</em> qui possède les attributs suivants décrits précédemment :
                     <code>
                         <ul class="list-unstyled">
-                            <li>string $nom</li>
-                            <li>int $quantite</li>
-                            <li>?string $unite</li>
+                            <li>string name</li>
+                            <li>int $quantity</li>
+                            <li>?string $unit</li>
+                            <li>int $idPizza</li>
                         </ul>
                     </code>
                     <em>Ces attributs permettront de stocker les valeurs des champs du formulaire sous forme d'objets, instances de cette classe, après validation du formulaire.</em>
                 </p>
                 <p>
                     <strong>2/</strong> En suivant les recommandations du TP6 sur les formulaires et leur validation, réalisez le script <em>editIngredient.php</em> qui crée le formulaire de saisie d'un ingrédient en respectant les contraintes suivantes et en utilisant les différents types de balises input permises en HTML 5 :
-                <ul>
-                    <li>le champs 'Nom de l'ingrédient' du formulaire est obligatoire.</li>
-                    <li>Le champ de quantité doit accepter uniquement des valeurs numériques.</li>
-                </ul>
+                    <ul>
+                        <li>le champs 'Nom de l'ingrédient' du formulaire est obligatoire.</li>
+                        <li>Le champ de quantité doit accepter uniquement des valeurs numériques.</li>
+                    </ul>
                 </p>
 
                 <p>
-                    <strong>3/</strong> Le script doit donc créer une nouvelle instance de la classe Ingrédient définie précédemment à partir des valeurs renvoyées par le formulaire, en passant en paramètre du constructeur les valeurs des champs du formulaire préalablement nettoyées (cf. TP6).
+                    <strong>3/</strong> Le script doit donc créer une nouvelle instance de la classe <strong>Ingredient</strong> définie précédemment à partir des valeurs renvoyées par le formulaire, en passant en paramètre du constructeur les valeurs des champs du formulaire préalablement nettoyées (cf. TP6).
                 </p>
 
                 <p>
                     <strong>4/</strong> Modifier le script <em>editIngredient.php</em> pour faire en sorte que, une fois les données du formulaire de saisie validées, il donne en réponse une page avec le descriptif de l'ingrédient qui vient juste d'être saisi.
                 </p>
                 <p>
-                    Vous compléterez pour ce faire la méthode <code>_toString()</code> de la classe <code>Ingrédient</code> afin qu'elle renvoie une seule chaîne de caractères en code HTML qui affiche l'ingrédient tout juste créé. Ainsi on affichera :
+                    Vous compléterez pour se faire la méthode <code>_toString()</code> de la classe <code>Ingredient</code> afin qu'elle renvoie une seule chaîne de caractères en code HTML qui affiche l'ingrédient tout juste créé. Ainsi on affichera :
                 <ul>
-                    <li>le nom de l'ingrédient dans une balise <code>h3</code></li>
-                    <li>la quantité et l'unité concaténé, dans une balise <code>h4</code>.</li>
+                    <li>Le nom de l'ingrédient dans une balise <code>h3</code></li>
+                    <li>La quantité et l'unité concaténée, dans une balise <code>h4</code>.</li>
                     <li>On mettra l'ensemble de ces balises pour un même ingrédient dans une balise <code>article</code>.</li>
-
+                </ul>
             </article>
         </section>
 
@@ -167,24 +168,27 @@
                     De même pour ajouter dynamiquement une nouvelle valeur x à un tableau php $tab, on peut écrire $tab[]=x.
 
                     pour pouvoir sérialiser et désérialiser notre objet, nous allons rajouter le code suivant a notre class <code>Ingrediant</code>
-
+                <pre>
                     <code>
                         public function __serialize(): array
                         {
                         return [
-                        'nom' => $this->nom,
-                        'quantite' => $this->quantite,
-                        'unite' => $this->unite,
+                        'name' => $this->name,
+                        'quantity' => $this->quantity,
+                        'unit' => $this->unit,
+                        'idPizza' => $this->idPizza,
                         ];
                         }
 
                         public function __unserialize(array $data): void
                         {
-                        $this->nom = $data['nom'];
-                        $this->quantite = $data['quantite'];
-                        $this->unite = $data['unite'];
+                        $this->name = $data['name'];
+                        $this->quantity = $data['quantity'];
+                        $this->unit = $data['unit'];
+                        $this->idPizza = $data['idPizza'];
                         }
                     </code>
+                </pre>
                 </p>
 
                 <p>
@@ -203,7 +207,43 @@
             <article class="col-12">
                 <h2>Partie C : <span class="h3">Utilisation d'une base de données (6 points)</span></h2>
                 <p>
+                    Nous allons maintenant plutôt pérenniser nos ingrediants en les ajoutants non pas dans une session mais dans une table <em>Ingredient</em> que vous allez créer dans votre base de données PotgreSQL habituelle. Un script SQL <a href="pizza.sql" target="_blank">pizza.sql</a> va créer les tables Ingredient et Pizza.
                 </p>
+                <br>
+                <div class="afaire"><br>
+                    <ul>
+                        <li>1/ Exécuter le script SQL de création de la table <strong>Messages</strong> dans votre base Postgresql. Vérifier que votre table est bien créée et qu'elle ne contient aucun tuple pour le moment. </li>
+                        <li>2/ Adapter la classe <strong>DB</strong> déjà vue en TP définie dans le fichier <em>DB.inc.php</em> pour, en plus des méthodes de gestion de connexion, y ajouter deux méthodes :
+                            <ul>
+                                <li>Une méthode <strong>getIngredient() </strong>pour récupérer les tuples de la table <strong>Ingredient</strong> sous forme d'un tableau d'objets de type <strong>Ingredient</strong>, </li>
+                                <li>Une méthode <strong>getIngredientsByPizza(int $idPizza) </strong>pour récupérer les tuples de la table <strong>Ingredient</strong> qui constitue la pizza passée en paramètre.</li>
+                                <li>Une méthode <strong>insertIngredient() </strong>pour insérer un nouveau tuple dans la table <strong>Ingredient</strong>. Cette méthode doit prendre en paramètre une valeur pour chaque attribut de la table <strong>Ingredient</strong></li>
+                            </ul>
+                        </li>
+
+
+
+
+
+
+                        <!--<li> Modifier le script <em>editMess.php</em> pour insérer les données validées du formulaire dans la table <strong>Messages</strong> de votre base de données en utilisant la méthode <strong>insertMessage()</strong>
+                            de la classe DB. La session ne sera donc plus utilisée pour mémoriser les messages saisis via le formulaire.</li>
+                        <li>Modifier également le script de la page <em>consultMess.php</em>&nbsp;pour récupérer les messages
+                            dans la table <strong>Messages</strong>
+                            de la base de données (via la méthode <strong>getMessages()</strong> de
+                            la classe DB et non plus dans la session. Comme précédemment, le script
+                            générera ensuite une page avec la liste des messages récupérés.
+                        </li>
+                        <li>Enfin, créer un script <em>deleteMess.php</em> qui permet de
+                            supprimer tous les tuples présents dans la table <strong>Messages</strong>
+                            grâce à la méthode <strong>deleteMessages()</strong> de la classe <strong>DB</strong>,
+                            et qui renvoie ensuite systématiquement à <em>editMess.php</em>
+                            pour revenir au formulaire d'edition des messages.<br>
+                            Il faut également ajouter un nouvel item <strong>Supprimer</strong>
+                            dans le menu gauche qui lancera le script <em>deleteMess.php</em>&nbsp;-->
+                        </li>
+                    </ul>
+                </div>
             </article>
         </section>
     </main>
@@ -211,200 +251,3 @@
 <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
-<!--
-<div id="corps">
-<div class="titre">
-
-<!-- Titre ------------------------------------------------------------
-<h2>A. Formulaire de création (8 points).<br>
-</h2>
-Dans cette partie, il s'agit de créer le script <em>editMess.php</em>
-qui génère et affiche un formulaire de création d'un message, ainsi
-que la page <em>consultMess.php</em> qui affiche la liste complète
-des messages.
-<br>
-<br>
-Le formulaire est constitué des champs suivants :
-<dl>
-  <dt>Titre</dt>
-  <dd>contient le titre du message</dd>
-  <dt>Nom de l'auteur </dt>
-  <dd>contient le nom de l'auteur</dd>
-  <dt>Email</dt>
-  <dd>contient l'email de l'auteur</dd>
-  <dt>Date de publication</dt>
-  <dd>contient la date de publication du message.</dd>
-  <dt>Texte</dt>
-  <dd>contient le texte du message (on prendra un champ texte de
-10 lignes et 20 colonnes)</dd>
-</dl>
-On ajoutera enfin deux boutons <strong>Valider</strong> et <strong>Annuler</strong>
-qui permettront respectivement de soumettre ou de remettre à zéro les
-champs du formulaire. <br>
-<div class="afaire">
-<ol>
-  <li>Créer une classe php <strong>Message</strong>, semblable à la
-classe <strong>Client</strong> vue en TP, dans le fichier <em>message.inc.php</em> qui
-possède les attributs publics suivants (la visibilité publique sera
-nécessaire pour la question 5), décrits précédemment : <br>
-titre, auteur, email, datep, texte. <br>
-Ces attributs permettront de stocker les valeurs des champs du
-formulaire sous forme d'objets, instances de cette classe, après validation
-du formulaire.<br>
-    <br>
-  </li>
-  <li>En suivant les recommandations du TP6 sur les formulaires et leur
-validation, réaliser le script <em>editMess.php</em> qui crée le formulaire de saisie d'un message en respectant les contraintes suivantes
-et en utilisant les différents types de balises <strong>input</strong> permises en HTML 5 :
-	<ul>
-		<li>tous les champs du formulaire sont obligatoires.</li>
-		<li>le champ email doit respecter un format d'email. </li>
-		<li>le champ de date est de type <strong>datetime-local</strong> </li>
-	</ul>
-    <br>
-Le script doit donc créer une nouvelle instance de la classe <strong>Message</strong> définie précédemment à partir des valeurs renvoyées par le formulaire,
-en passant en paramètre du constructeur les valeurs des champs du formulaire préalablement nettoyés (cf. TP6).
-  </li>
-  <li>
-    <p>Constituer le menu gauche de façon à ce qu'il comporte deux items : un item <strong>Editer</strong>
-qui envoie sur la page <em>editMess.php</em> que l'on est en train de
-réaliser, et un item <strong>Afficher</strong> qui renvoie sur la page
-    <em>consultMess.php </em>que l'on va réaliser dans la partie suivante.
-    </p>
-Voici ci-dessous une idée de la mise en page à obtenir :<br>
-    <br>
-    <img src="form_new.png" alt="formulaire" height="298" width="738"><br>
-    <br>
-  </li>
-  <li>Modifier le script <em>editMess.php</em> <span class="gs">pour
-faire en sorte que, une fois les données du formulaire de saisie validées, il donne en réponse une page avec
-le descriptif du message qui vient juste d'être saisi.</span><br>
-Vous complèterez pour ce faire la méthode <strong>_toString()</strong> de
-la classe <strong>Message</strong> afin qu'elle renvoie une seule chaîne
-de caractère en code HTML qui affiche le message juste créé : ainsi on affichera le titre du message dans une balise <strong>h3</strong>,
-le nom de l'auteur suivi de la date dans une balise <strong>h4</strong>,
-l'email dans une balise <strong>h5</strong>, enfin le texte dans une
-balise <strong>p</strong>. <br/>
-On mettra l'ensemble de ces balises pour un même message dans
-une balise <strong>article</strong>.
-Les styles associés sont déjà fournis dans la feuille de style <em>site.css</em> présent dans l'archive <em>fct_Aux.tar</em> à télécharger.<br>
-Ci-dessous une copie d'écran de ce que cela devrait donner :<br/>
-    <br/>
-    <img src="une_actu.png" alt="message" height="231" width="741"><br/>
-    <br/>
-    <br/>
-  </li>
-</ol>
-</div>
-<!-- ================================================= --
-<hr>
-<h2>B. Affichage des messages (6 points).<br>
-</h2>
-Dans cette partie, il s'agit de créer le script <em>consultMess.php</em> qui affiche la liste complète
-des messages créés pendant le temps d'une session utilisateur.<br/>
-Ce script doit afficher tous les messages créés jusque là, verticalement
-comme dans la copie d'écran ci-dessous (qui comporte deux messages). Il n'y a
-pas de mise en forme supplémentaire à prévoir au-delà de ce qui a
-été prévu dans la méthode <strong>_toString()</strong> de
-la classe <strong>Message</strong> vue précédemment pour l'affichage
-d'un message.<br/>
-En revanche, la question principale ici est de pouvoir stocker successivement les objets <strong>Message</strong> créés
-via le formulaire géré par le script <em>editMess.php</em> sans utiliser de base de données
-pour l'instant. Pour réaliser cela, on va utiliser les sessions qui permettent
-de conserver des informations entre des pages successives de script.<br/>
-La procédure est la suivante : dans le script <em>editMess.php</em>, on ouvre une session ou on récupère la session courante pour y stocker
-un tableau d'objets <strong>listeMess</strong> comportant tous les objets <strong>Message</strong> créés jusqu'ici durant la session. <br/>
-<br/>
-<strong>Rappel de ce qui a été vu en TP : </strong>pour stocker un objet dans une session, il est nécessaire de le sérialiser (c'est-à-dire en faire une grande chaîne de
-caractères) grâce à la fonction <strong>serialize(Object)</strong>. <br/>
-Inversement lorsque l'on devra extraire les messages dans le script <em>consultMess.php</em>, il faudra désérialiser les objets de type <strong>Message</strong>
-présents dans le tableau stocké dans la session courante, grâce à la fonction <strong>unserialize()</strong> qui attend une chaine de caractères.
-<br/>
-De même pour ajouter dynamiquement une nouvelle valeur <b>x</b> à un tableau php <b>$tab</b>, on peut écrire <b>$tab[]=x</b>.
-<br/>
-<br/>
-<div class="afaire">
-<ol>
-  <li>
-Compléter le script <em>editMess.php</em> de façon à pouvoir stocker tous les objets de type <strong>Message </strong>
-créés dans la session courante, puis écrire le script <em>consultMess.php</em> qui permet de visualiser les messages stockés dans la
-session courante comme décrit précédemment. <br/>
-Ci-dessous une idée de la mise en page à obtenir lorsque l'on clique sur l'item de menu <strong>Afficher</strong> (donc on appelle le fichier <em>consultMess.php</em>):<br>
-    <br>
-    <img src="deux_actus.png" alt="affichage" height="266" width="593"><br>
-    <br>
-  </li>
-  <li>Compléter le menu par un dernier item <strong>Réinitialiser </strong>qui
-    fait appel au fichier<em>
-bye.php</em> (fichier déjà employé en TP) qui permet de réinitialiser
-la session, puis de réafficher le script <em>editMess.php</em>.<br>
-    <br>
-  </li>
-</ol>
-</div>
-
-<!-- ================================================= --
-<hr>
-<h2>C. Utilisation d'une base de données (6 points)<br>
-</h2>
-Nous allons maintenant plutôt pérenniser nos messages en les stockant non
-pas dans une session mais dans
-une table <em>Messages</em> que vous allez créer dans votre base de
-données PotgreSQL habituelle.
-Un script SQL <a href="creerMessages.sql" target="_blank">creerMessages.sql</a>
-de création de cette table vous est
-fourni dans les ressources du sujet. On considèrera pour simplifier que
-tous les champs de cette table sont des chaînes de caractères. Cette table possèdera les mêmes noms de
-champs que les attributs de la classe <strong>Message</strong>.
-<br>
-(Rem: on utilise ici le type <strong>text</strong> dans PostGreSql pour le champ <strong>texte</strong>
-car ce champ peut contenir une longue chaîne de caractères).
-<br>
-<div class="afaire"><br>
-<ol>
-  <li>Exécuter le script SQL de création de la table <strong>Messages</strong>
-dans votre base Postgresql. <br>
-Vérifier que votre table est bien créée et qu'elle ne contient aucun
-tuple pour le moment. </li>
-  <li>Adapter la classe <strong>DB</strong> déjà vue en TP définie
-dans le fichier <em>DB.inc.php</em> pour, en plus
-des méthodes de gestion de connexion, y ajouter deux méthodes
-:
-    <ul>
-      <li> une méthode <strong>getMessages() </strong>pour récupérer les
-tuples de la table <strong>Messages</strong> sous forme d'un tableau
-d'objets de type <strong>Message</strong>, </li>
-      <li> une méthode <strong>insertMessage() </strong>pour insérer un
-nouveau tuple dans la table <strong>Messages</strong>. Cette méthode
-doit prendre en paramètre une valeur pour chaque attribut de la table <strong>Messages</strong></li>
-      <li>une méthode <strong>deleteMessages()</strong> qui supprime tous
-les tuples de la table <strong>Messages</strong></li>
-    </ul>
-    </li>
-  <li> Modifier le script <em>editMess.php</em> pour
-insérer les données validées du formulaire dans la table <strong>Messages</strong>
-de votre base de données en utilisant la méthode <strong>insertMessage()</strong>
-de la classe DB. La session ne sera donc plus utilisée pour mémoriser
-les messages saisis via le formulaire.</li>
-  <li>Modifier également le script de la page <em>consultMess.php</em>&nbsp;pour récupérer les messages
-    dans la table <strong>Messages</strong>
-de la base de données (via la méthode <strong>getMessages()</strong> de
-la classe DB et non plus dans la session. Comme précédemment, le script
-générera ensuite une page avec la liste des messages récupérés.
-  </li>
-  <li>Enfin, créer un script <em>deleteMess.php</em> qui permet de
-supprimer tous les tuples présents dans la table <strong>Messages</strong>
-grâce à la méthode <strong>deleteMessages()</strong> de la classe <strong>DB</strong>,
-et qui renvoie ensuite systématiquement à <em>editMess.php</em>
-pour revenir au formulaire d'edition des messages.<br>
-Il faut également ajouter un nouvel item <strong>Supprimer</strong>
-dans le menu gauche qui lancera le script <em>deleteMess.php</em>&nbsp;
-  </li>
-</ol>
-</div>
-<!-- ================================================= --
-
-</body></html>
--->
