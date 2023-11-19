@@ -44,8 +44,8 @@
             <article class="col-6">
                 <span class="h5">Parties A et B : formulaire de création et affichage</span>
                 <ul>
-                    <li>TODO METTRE LE NOM DES FICHIERS</li>
-                    <li>TODO METTRE LE NOM DES FICHIERS</li>
+                    <li>editIngredient.php</li>
+                    <li>Ingredient.inc.php</li>
                     <li>TODO METTRE LE NOM DES FICHIERS</li>
                 </ul>
             </article>
@@ -60,7 +60,7 @@
                 Avant de rendre votre projet, merci de modifier la connexion a la base de données :
                 <ul>
                     <li>URL : 127.0.0.1</li>
-                    <li>Login : Pizza</li>
+                    <li>Login : pizza</li>
                     <li>Mot de passe : Hawaienne</li>
                 </ul>
             </article>
@@ -104,7 +104,7 @@
             <article class="col-12">
                 <h2>Partie A : <span class="h3">Formulaire de création (8 points).</span></h2>
                 <p>
-                    Dans cette partie, il s'agit de créer le script <em>editIngredient.php</em> qui génère et affiche un formulaire de création d'un ingrédient.
+                    Dans cette partie, il s'agit de modifier le script <em>editIngredient.php</em> qui génère et affiche un formulaire de création d'un ingrédient.
                 </p>
                 <p>Le formulaire est constitué des champs suivants :</p>
                 <div class="ms-5">
@@ -171,10 +171,10 @@ int $quantity
 
                 <p>
                     Rappel de ce qui a été vu en TP : pour stocker un objet dans une session, il est nécessaire de le sérialiser (c'est-à-dire en faire une grande chaîne de caractères) grâce à la fonction serialize(Object).
-                    Inversement lorsque l'on devra extraire les messages dans le script consultMess.php, il faudra désérialiser les objets de type Message présents dans le tableau stocké dans la session courante, grâce à la fonction unserialize() qui attend une chaine de caractères.
+                    Inversement lorsque l'on devra extraire les ingredient dans le script consultPizza.php, il faudra désérialiser les objets de type Message présents dans le tableau stocké dans la session courante, grâce à la fonction unserialize() qui attend une chaine de caractères.
                     De même pour ajouter dynamiquement une nouvelle valeur x à un tableau php $tab, on peut écrire $tab[]=x.
 
-                    pour pouvoir sérialiser et désérialiser notre objet, nous allons rajouter le code suivant a notre class <code>Ingrediant</code>
+                    pour pouvoir sérialiser et désérialiser notre objet, nous allons rajouter le code suivant a notre class <code>Ingrediant</code>. cette Méthode permet de garder "private" les attributs de la class
                 <pre>
                     <code>
 public function __serialize(): array
@@ -220,7 +220,7 @@ public function __unserialize(array $data): void
                 <div>
                     <ul>
                         <li>1/ Exécuter le script SQL de création des tables <strong>Ingredient, Pizza et Category</strong> dans votre base Postgresql. Vérifier que vos tables sont bien créées avec des Pizzas. </li>
-                        <li>2/ Rajouter un attribut <code>private int $idPizza;</code> a la classe <strong>Ingredient</strong>. 
+                        <li>2/ Rajouter un attribut <code>private int $idPizza;</code> a la classe <strong>Ingredient</strong>.
                         <li>3/ Adapter la classe <strong>DB</strong>, déjà vue en TP définie dans le fichier <em>DB.inc.php</em> pour, en plus des méthodes de traitants les pizzas, y ajouter trois méthodes :
                             <ul>
                                 <li>Une méthode <strong>getIngredients() </strong>pour récupérer les tuples de la table <strong>Ingredient</strong> sous forme d'un tableau d'objets de type <strong>Ingredient</strong>, </li>
@@ -228,7 +228,7 @@ public function __unserialize(array $data): void
                                 <li>Une méthode <strong>insertIngredient() </strong>pour insérer un nouveau tuple dans la table <strong>Ingredient</strong>. Cette méthode doit prendre en paramètre une valeur pour chaque attribut de la table <strong>Ingredient</strong></li>
                             </ul>
                         </li>
-                        <li>4/ Modifier le script de la page <em>consultPizza.php</em>&nbsp;pour récupérer les ingredients dans la table <strong>Ingrediants</strong> de la base de données (via la méthode <strong>getIngredientsByPizza()</strong> de la classe DB et non plus dans la session.</li>
+                        <li>4/ Modifier le script de la page <em>consultPizza.php</em>&nbsp;pour récupérer les ingredients dans la table <strong>Ingrediant</strong> de la base de données (via la méthode <strong>getIngredientsByPizza()</strong> de la classe DB et non plus dans la session.</li>
                         <li>5/ Modifier également le script <em>editIngredient.php</em> pour insérer les données validées du formulaire dans la table <strong>Ingredient</strong> de votre base de données en utilisant la méthode <strong>insertIngredient()</strong> de la classe DB. La session ne sera donc plus utilisée. Vous pourrez récupérer le paramètre <strong>idPizza</strong> via la méthode GET</li>
                     </ul>
                 </div>

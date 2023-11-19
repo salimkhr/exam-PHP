@@ -7,7 +7,7 @@ class Pizza {
     private ?string $recipeText;  // Texte de la recette de la pizza (chaîne de caractères ou null)
     private ?string $category;  // Texte de la catégorie à laquelle la pizza appartient (chaîne de caractères) géré en base de données via la table Category
 
-    public function __construct(int $id=0,string $name="", ?string $description=null, float $price=0.0, ?string $recipeText="", string $category="") {
+    public function __construct(int $id,string $name, ?string $description, float $price, ?string $recipeText, string $category) {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;

@@ -12,7 +12,7 @@ echo enTete();
 
 $pizza = initPizza();
 
-//TODO: récupérer la liste des ingredients et les passer en 2éme paramétrè de la fonction AfficherPizza
+//TODO: récupérer la liste des ingredients via la SESSION et les passer en 2éme paramétrè de la fonction AfficherPizza
 
 echo afficherPizza($pizza);
 echo pied();

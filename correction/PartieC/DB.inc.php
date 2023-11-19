@@ -13,10 +13,10 @@ class DB {
     /************************************************************************/
     private function __construct() {
         // Connexion à la base de données
-        $connStr = 'pgsql:host=localhost port=5432 dbname=loginLDAP'; // A MODIFIER !
+        $connStr = 'pgsql:host=localhost port=5432 dbname=postgres'; // A MODIFIER !
         try {
             // Connexion à la base
-            $this->connect = new PDO($connStr, 'loginLDAP', 'mdpBdd'); //A MODIFIER !
+            $this->connect = new PDO($connStr, 'pizza', 'Hawaienne'); //A MODIFIER !
             // Configuration facultative de la connexion
             $this->connect->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
             $this->connect->setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION);
@@ -76,8 +76,8 @@ class DB {
         //on prépare la requête
         $stmt = $this->connect->prepare($requete);
         //on indique que l'on va récupére les tuples sous forme d'objets instance de Client
-        $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, $nomClasse);
-        //on exécute la requête
+       $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, $nomClasse);
+               //on exécute la requête
         if ($tparam != null) {
             $stmt->execute($tparam);
         }
