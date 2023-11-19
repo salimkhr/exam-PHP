@@ -13,8 +13,7 @@ echo '<div class="row">';
 foreach ($pizzas as $pizza)
 {
     //TODO: récuperer la liste des ingrediants  de la pizza dans la base de donnée  et les passer en 2éme paramétre de la fonction Afficher Pizza.
-    //var_dump($pizza);
-    echo afficherPizza($pizza);
+    echo afficherPizza($pizza, DB::getInstance()->getIngredientsByPizza($pizza->getId()));
 }
 echo '</div>';
 echo pied();
@@ -31,10 +30,10 @@ function afficherPizza(Pizza $pizza, array $ingredients= []):String
     <div class="card-body">
         <p class="card-text">'.$pizza->getDescription().'</p>
         <h3>Ingredient:</h3>
-        <ul class="list-group">';
+        <ul>';
           foreach ($ingredients as $ingredient) {
             $s.='<li>'
-            .$ingredient->getName().' '.$ingredient->getQuantity().' '.($ingredient->getUnit() ?? '').
+            .$ingredient->getName().' : '.$ingredient->getQuantity().' '.($ingredient->getUnit() ?? '').
             '</li>';
           }
       $s.='</ul>

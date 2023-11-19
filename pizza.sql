@@ -1,6 +1,6 @@
-/*drop table Ingredient;
+drop table Ingredient;
 drop table Pizza;
-drop table Category;*/
+drop table Category;
 
 CREATE TABLE Category (
     id SERIAL PRIMARY KEY,

@@ -1,7 +1,8 @@
 <?php
 
-require 'Category.inc.php';
-require 'Pizza.inc.php';
+Include 'Category.inc.php';
+Include 'Pizza.inc.php';
+Include 'Ingredient.inc.php';
 
 class DB {
     private static $instance = null; //mémorisation de l'instance de DB pour appliquer le pattern Singleton
@@ -76,8 +77,8 @@ class DB {
         //on prépare la requête
         $stmt = $this->connect->prepare($requete);
         //on indique que l'on va récupére les tuples sous forme d'objets instance de Client
-       $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, $nomClasse);
-               //on exécute la requête
+        $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, $nomClasse);
+        //on exécute la requête
         if ($tparam != null) {
             $stmt->execute($tparam);
         }
@@ -117,16 +118,31 @@ class DB {
     /*************************************************************************
      * Fonctions qui peuvent être utilisées dans les scripts PHP
      *************************************************************************/
-    public function getPizzas() {
+    public function getPizzas():array {
         $requete = 'select p.*,c."name" as category from pizza p join Category c on c.id = p.idcategory';
         return $this->execQuery($requete,null,'Pizza');
     }
 
-    public function getCategoryById(int $id)
-    {
+    public function getCategoryById(int $id):array {
         $requete = 'select * from Category c where c.id = ?';
         return $this->execQuery($requete,[$id],'Category');
     }
+
+    public function getIngredients():array {
+        $requete = 'select * from ingredient';
+        return $this->execQuery($requete,null,'Ingredient');
+    }
+
+    public function getIngredientsByPizza(int $id):array {
+        $requete = 'select * from ingredient where idPizza = ?';
+        return $this->execQuery($requete,[$id],'Ingredient');
+    }
+
+    public function insertIngredient(int $id) {
+        $requete = 'Insert into Ingredient...';
+        return $this->execQuery($requete,[$id],'Ingredient');
+    }
+
 
 
 } //fin classe DB
