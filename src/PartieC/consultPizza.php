@@ -1,14 +1,18 @@
 <?php
 include('fct_aux.inc.php');
-include('Ingredient.inc.php');
-include('Pizza.inc.php');
-include('Category.inc.php');
+include ('db.inc.php');
 
 echo enTete();
 
-$pizza = initPizza();
+$pizzas = initPizza();
 
-echo afficherPizza($pizza);
+foreach ($pizzas as $pizza)
+{
+    //TODO: récuperer la liste des ingrediants  de la pizza dans la base de donnée  et les passer en 2éme paramétre de la fonction Afficher Pizza.
+
+    echo afficherPizza($pizza,);
+}
+
 echo pied();
 
 function afficherPizza(Pizza $pizza, array $ingredients):String
@@ -22,16 +26,16 @@ function afficherPizza(Pizza $pizza, array $ingredients):String
             <p class="card-text">'.$pizza->getDescription().'</p>
             <h3>Ingredient:</h3>
             <ul class="list-group">';
-              foreach ($pizza->getIngredients() as $ingredient) {
+              foreach ($ingredients as $ingredient) {
                 $s.='<li>'
-                .$ingredient->getName().' '.$ingredient->getQuantity().' '.$ingredient?->getUnit().
+                .$ingredient->getName().' '.$ingredient->getQuantity().' '.($ingredient->getUnit() ?? '').
                 '</li>';
               }
           $s.='</ul>
             <h3 class="mt-5">Recette:</h3><p>'.$pizza->getRecipeText().'</p>
         </div>
         <div class="card-footer">
-            <p class="float-start">'.$pizza->getCategory()->getName().'</p>
+            <p class="float-start">'.$pizza->getCategory().'</p>
             <p class="float-end">'.$pizza->getPrice().'€</p>
         </div>
     </div>';
@@ -39,18 +43,8 @@ function afficherPizza(Pizza $pizza, array $ingredients):String
     return $s;
 }
 
-function initPizza()
+function initPizza():array
 {
-  $pizza = new Pizza(
-      5,
-      'Hawaïenne',
-      'Une pizza classique avec du jambon et de l\'ananas',
-      13.99,
-      'Étalez la sauce tomate sur la pâte, ajoutez du fromage mozzarella, du jambon et des morceaux d\'ananas. Cuisez jusqu\'à ce que le fromage soit fondu et la croûte dorée.',
-  );
-  $pizza->setCategory(new Category('Ne devrais pas exister'));
-
-  return $pizza;
+    return DB::getInstance()->getPizzas();
 }
-
 ?>

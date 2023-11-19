@@ -56,6 +56,13 @@
                     <li>TODO METTRE LE NOM DES FICHIERS</li>
                     <li>TODO METTRE LE NOM DES FICHIERS</li>
                 </ul>
+
+                Avant de rendre votre projet, merci de modifier la connexion a la base de données :
+                <ul>
+                    <li>URL : 127.0.0.1</li>
+                    <li>Login : Pizza</li>
+                    <li>Mot de passe : Hawaienne</li>
+                </ul>
             </article>
             <article class="col-12">
                 <div class="row">
@@ -207,41 +214,21 @@ public function __unserialize(array $data): void
             <article class="col-12">
                 <h2>Partie C : <span class="h3">Utilisation d'une base de données (6 points)</span></h2>
                 <p>
-                    Nous allons maintenant plutôt pérenniser nos ingrediants en les ajoutants non pas dans une session mais dans une table <em>Ingredient</em> que vous allez créer dans votre base de données PotgreSQL habituelle. Un script SQL <a href="pizza.sql" target="_blank">pizza.sql</a> va créer les tables Ingredient et Pizza.
+                    Nous allons maintenant plutôt pérenniser nos ingredients en les ajoutant non pas dans une session, mais dans une table <em>Ingredient</em> que vous allez créer dans votre base de données PotgreSQL habituelle. Un script SQL <a href="pizza.sql" target="_blank">pizza.sql</a> va créer les tables Ingredient et Pizza.
                 </p>
                 <br>
-                <div class="afaire"><br>
+                <div>
                     <ul>
-                        <li>1/ Exécuter le script SQL de création de la table <strong>Messages</strong> dans votre base Postgresql. Vérifier que votre table est bien créée et qu'elle ne contient aucun tuple pour le moment. </li>
-                        <li>2/ Adapter la classe <strong>DB</strong> déjà vue en TP définie dans le fichier <em>DB.inc.php</em> pour, en plus des méthodes de gestion de connexion, y ajouter deux méthodes :
+                        <li>1/ Exécuter le script SQL de création des tables <strong>Ingredient,Pizza et Category</strong> dans votre base Postgresql. Vérifier que vos tables sont bien créées avec des Pizzas. </li>
+                        <li>2/ Adapter la classe <strong>DB</strong> déjà vue en TP définie dans le fichier <em>DB.inc.php</em> pour, en plus des méthodes de traitants les pizzas, y ajouter trois méthodes :
                             <ul>
                                 <li>Une méthode <strong>getIngredient() </strong>pour récupérer les tuples de la table <strong>Ingredient</strong> sous forme d'un tableau d'objets de type <strong>Ingredient</strong>, </li>
                                 <li>Une méthode <strong>getIngredientsByPizza(int $idPizza) </strong>pour récupérer les tuples de la table <strong>Ingredient</strong> qui constitue la pizza passée en paramètre.</li>
                                 <li>Une méthode <strong>insertIngredient() </strong>pour insérer un nouveau tuple dans la table <strong>Ingredient</strong>. Cette méthode doit prendre en paramètre une valeur pour chaque attribut de la table <strong>Ingredient</strong></li>
                             </ul>
                         </li>
-
-
-
-
-
-
-                        <!--<li> Modifier le script <em>editMess.php</em> pour insérer les données validées du formulaire dans la table <strong>Messages</strong> de votre base de données en utilisant la méthode <strong>insertMessage()</strong>
-                            de la classe DB. La session ne sera donc plus utilisée pour mémoriser les messages saisis via le formulaire.</li>
-                        <li>Modifier également le script de la page <em>consultMess.php</em>&nbsp;pour récupérer les messages
-                            dans la table <strong>Messages</strong>
-                            de la base de données (via la méthode <strong>getMessages()</strong> de
-                            la classe DB et non plus dans la session. Comme précédemment, le script
-                            générera ensuite une page avec la liste des messages récupérés.
-                        </li>
-                        <li>Enfin, créer un script <em>deleteMess.php</em> qui permet de
-                            supprimer tous les tuples présents dans la table <strong>Messages</strong>
-                            grâce à la méthode <strong>deleteMessages()</strong> de la classe <strong>DB</strong>,
-                            et qui renvoie ensuite systématiquement à <em>editMess.php</em>
-                            pour revenir au formulaire d'edition des messages.<br>
-                            Il faut également ajouter un nouvel item <strong>Supprimer</strong>
-                            dans le menu gauche qui lancera le script <em>deleteMess.php</em>&nbsp;-->
-                        </li>
+                        <li>4/ Modifier le script de la page <em>consultPizza.php</em>&nbsp;pour récupérer les ingredients dans la table <strong>Ingrediants</strong> de la base de données (via la méthode <strong>getIngredientsByPizza()</strong> de la classe DB et non plus dans la session.</li>
+                        <li>3/ Modifier également le script <em>editIngredient.php</em> pour insérer les données validées du formulaire dans la table <strong>Ingredient</strong> de votre base de données en utilisant la méthode <strong>insertIngredient()</strong> de la classe DB. La session ne sera donc plus utilisée. Vous pourrez récupérer l'idPizza le paramètre <strong>idPizza</strong> passé via la méthode GET</li>
                     </ul>
                 </div>
             </article>

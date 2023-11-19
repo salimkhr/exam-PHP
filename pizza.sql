@@ -3,12 +3,12 @@ drop table Pizza;
 drop table Category;*/
 
 CREATE TABLE Category (
-    idCategory SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Pizza (
-    idPizza SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT,
     price DECIMAL(10, 2) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE Pizza (
 );
 
 CREATE TABLE Ingredient (
-    idIngredient SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     quantity INT NOT NULL,
     unit VARCHAR(50),
