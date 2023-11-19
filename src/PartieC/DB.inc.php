@@ -128,23 +128,6 @@ class DB {
         return $this->execQuery($requete,[$id],'Category');
     }
 
-    public function getIngredients():array {
-        $requete = 'select * from ingredient';
-        return $this->execQuery($requete,null,'Ingredient');
-    }
-
-    public function getIngredientsByPizza(int $id):array {
-        $requete = 'select * from ingredient where idPizza = ?';
-        return $this->execQuery($requete,[$id],'Ingredient');
-    }
-
-    public function insertIngredient(int $id) {
-        $requete = 'Insert into Ingredient...';
-        return $this->execQuery($requete,[$id],'Ingredient');
-    }
-
-
-
 } //fin classe DB
 
 ?>

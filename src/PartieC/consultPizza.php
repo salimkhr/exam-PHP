@@ -13,7 +13,7 @@ echo '<div class="row">';
 foreach ($pizzas as $pizza)
 {
     //TODO: récuperer la liste des ingrediants  de la pizza dans la base de donnée  et les passer en 2éme paramétre de la fonction Afficher Pizza.
-    echo afficherPizza($pizza, DB::getInstance()->getIngredientsByPizza($pizza->getId()));
+    echo afficherPizza($pizza);
 }
 echo '</div>';
 echo pied();
