@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include('fct_aux.inc.php');
 include('Ingredient.inc.php');
 include('Pizza.inc.php');
@@ -8,15 +12,15 @@ echo enTete();
 
 $pizza = initPizza();
 
-//TODO: récupérer la liste des ingredients dans la SESSION et les passer en 2éme paramétrè de la fonction AfficherPizza
+//TODO: récupérer la liste des ingredients et les passer en 2éme paramétrè de la fonction AfficherPizza
 
-echo afficherPizza($pizza,);
+echo afficherPizza($pizza);
 echo pied();
 
-function afficherPizza(Pizza $pizza, array $ingredients):String
+function afficherPizza(Pizza $pizza, array $ingredients = []):String
 {
   $s= '<div class="card w-25 mx-auto">
-        <img src="img/'.$pizza->getId().'.jpg" class="card-img-top img-fluid img-thumbnail" alt="'.$pizza->getName().'">
+        <img src="../img/'.$pizza->getId().'.jpg" class="card-img-top img-fluid img-thumbnail" alt="'.$pizza->getName().'">
         <div class="card-header">
             <h3 class="text-center">'.$pizza->getName().'</h3>
         </div>

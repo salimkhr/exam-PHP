@@ -219,16 +219,17 @@ public function __unserialize(array $data): void
                 <br>
                 <div>
                     <ul>
-                        <li>1/ Exécuter le script SQL de création des tables <strong>Ingredient,Pizza et Category</strong> dans votre base Postgresql. Vérifier que vos tables sont bien créées avec des Pizzas. </li>
-                        <li>2/ Adapter la classe <strong>DB</strong> déjà vue en TP définie dans le fichier <em>DB.inc.php</em> pour, en plus des méthodes de traitants les pizzas, y ajouter trois méthodes :
+                        <li>1/ Exécuter le script SQL de création des tables <strong>Ingredient, Pizza et Category</strong> dans votre base Postgresql. Vérifier que vos tables sont bien créées avec des Pizzas. </li>
+                        <li>2/ Rajouter un attribut <code>private int $idPizza;</code> a la classe <strong>Ingredient</strong>. 
+                        <li>3/ Adapter la classe <strong>DB</strong>, déjà vue en TP définie dans le fichier <em>DB.inc.php</em> pour, en plus des méthodes de traitants les pizzas, y ajouter trois méthodes :
                             <ul>
-                                <li>Une méthode <strong>getIngredient() </strong>pour récupérer les tuples de la table <strong>Ingredient</strong> sous forme d'un tableau d'objets de type <strong>Ingredient</strong>, </li>
+                                <li>Une méthode <strong>getIngredients() </strong>pour récupérer les tuples de la table <strong>Ingredient</strong> sous forme d'un tableau d'objets de type <strong>Ingredient</strong>, </li>
                                 <li>Une méthode <strong>getIngredientsByPizza(int $idPizza) </strong>pour récupérer les tuples de la table <strong>Ingredient</strong> qui constitue la pizza passée en paramètre.</li>
                                 <li>Une méthode <strong>insertIngredient() </strong>pour insérer un nouveau tuple dans la table <strong>Ingredient</strong>. Cette méthode doit prendre en paramètre une valeur pour chaque attribut de la table <strong>Ingredient</strong></li>
                             </ul>
                         </li>
                         <li>4/ Modifier le script de la page <em>consultPizza.php</em>&nbsp;pour récupérer les ingredients dans la table <strong>Ingrediants</strong> de la base de données (via la méthode <strong>getIngredientsByPizza()</strong> de la classe DB et non plus dans la session.</li>
-                        <li>3/ Modifier également le script <em>editIngredient.php</em> pour insérer les données validées du formulaire dans la table <strong>Ingredient</strong> de votre base de données en utilisant la méthode <strong>insertIngredient()</strong> de la classe DB. La session ne sera donc plus utilisée. Vous pourrez récupérer l'idPizza le paramètre <strong>idPizza</strong> passé via la méthode GET</li>
+                        <li>5/ Modifier également le script <em>editIngredient.php</em> pour insérer les données validées du formulaire dans la table <strong>Ingredient</strong> de votre base de données en utilisant la méthode <strong>insertIngredient()</strong> de la classe DB. La session ne sera donc plus utilisée. Vous pourrez récupérer le paramètre <strong>idPizza</strong> via la méthode GET</li>
                     </ul>
                 </div>
             </article>
