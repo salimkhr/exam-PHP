@@ -41,29 +41,6 @@
                     certains fichiers devront être copiés à l'identique). Les dossiers sont les suivants :
                 <p>
             </article>
-            <article class="col-6">
-                <span class="h5">Parties A et B : formulaire de création et affichage</span>
-                <ul>
-                    <li>editIngredient.php</li>
-                    <li>Ingredient.inc.php</li>
-                    <li>TODO METTRE LE NOM DES FICHIERS</li>
-                </ul>
-            </article>
-            <article class="col-6">
-                <span class="h5">Partie C : utilisation d'une base de données</span>
-                <ul>
-                    <li>TODO METTRE LE NOM DES FICHIERS</li>
-                    <li>TODO METTRE LE NOM DES FICHIERS</li>
-                    <li>TODO METTRE LE NOM DES FICHIERS</li>
-                </ul>
-
-                Avant de rendre votre projet, merci de modifier la connexion a la base de données :
-                <ul>
-                    <li>URL : 127.0.0.1</li>
-                    <li>Login : pizza</li>
-                    <li>Mot de passe : Hawaienne</li>
-                </ul>
-            </article>
             <article class="col-12">
                 <div class="row">
                     <div class="col-2">
@@ -145,15 +122,8 @@ int $quantity
                 </p>
 
                 <p>
-                    <strong>4/</strong> Modifier le script <em>editIngredient.php</em> pour faire en sorte que, une fois les données du formulaire de saisie validées, il donne en réponse une page avec le descriptif de l'ingrédient qui vient juste d'être saisi.
+                    <strong>4/</strong> Modifier le script <em>editIngredient.php</em> pour faire en sorte que, une fois les données du formulaire de saisie validées, et l'objet crée, le script renvois vers la page <em>consultPizza.php<em>.
                 </p>
-                <p>
-                    Vous compléterez pour se faire la méthode <code>__toString()</code> de la classe <code>Ingredient</code> afin qu'elle renvoie une seule chaîne de caractères en code HTML qui affiche l'ingrédient tout juste créé. Ainsi on affichera :
-                <ul>
-                    <li>Le nom de l'ingrédient dans une balise <code>h3</code></li>
-                    <li>La quantité et l'unité concaténée, dans une balise <code>h4</code>.</li>
-                    <li>On mettra l'ensemble de ces balises pour un même ingrédient dans une balise <code>article</code>.</li>
-                </ul>
             </article>
         </section>
 
@@ -162,7 +132,7 @@ int $quantity
             <article class="col-12">
                 <h2>Partie B : <span class="h3">Affichage des pizzas (6 points).</span></h2>
                 <p>
-                    Dans cette partie, il s'agit de Modifier le script consultPizza.php qui affiche la liste complète des ingrédients créés pendant le temps d'une session utilisateur.
+                    Dans cette partie, il s'agit de Modifier le script <em>consultPizza.php<em> qui affiche la liste complète des ingrédients créés pendant le temps d'une session utilisateur.
                 <p>
                     Ce script doit afficher tous les ingrédients créés jusque là.
                     En revanche, la question principale ici est de pouvoir stocker successivement les objets <code>ingrédient</code> créés via le formulaire géré par le script <em>editIngredient.php</em> sans utiliser de base de données pour l'instant. Pour réaliser cela, on va utiliser les sessions qui permettent de conserver des informations entre des pages successives de script.
@@ -171,7 +141,7 @@ int $quantity
 
                 <p>
                     Rappel de ce qui a été vu en TP : pour stocker un objet dans une session, il est nécessaire de le sérialiser (c'est-à-dire en faire une grande chaîne de caractères) grâce à la fonction serialize(Object).
-                    Inversement lorsque l'on devra extraire les ingredient dans le script consultPizza.php, il faudra désérialiser les objets de type Message présents dans le tableau stocké dans la session courante, grâce à la fonction unserialize() qui attend une chaine de caractères.
+                    Inversement lorsque l'on devra extraire les ingredient dans le script <em>consultPizza.php</em>, il faudra désérialiser les objets de type Message présents dans le tableau stocké dans la session courante, grâce à la fonction unserialize() qui attend une chaine de caractères.
                     De même pour ajouter dynamiquement une nouvelle valeur x à un tableau php $tab, on peut écrire $tab[]=x.
 
                     pour pouvoir sérialiser et désérialiser notre objet, nous allons rajouter le code suivant a notre class <code>Ingrediant</code>. cette Méthode permet de garder "private" les attributs de la class
@@ -197,14 +167,12 @@ public function __unserialize(array $data): void
                 </p>
 
                 <p>
-                    <strong>1/</strong> Compléter le script <em>editIngredient.php</em> de façon à pouvoir stocker tous les objets de type <code>Ingrediant</code> créés dans la session courante. la clef de la session sera 'ingredient'
+                    <strong>1/</strong> Compléter le script <em>editIngredient.php</em> de façon à pouvoir stocker tous les objets de type <code>Ingrediant</code> créés dans la session courante. la clef de la session sera 'ingredients'
                 </p>
 
                 <p>
                     <strong>2/</strong> Modifier le script <em>consultPizza.php</em> qui permet de visualiser les pizzas aves les ingredients stockés dans la session courante comme décrit précédemment.
-                    Le script <em>consultPizza.php</em> crée une instance de l'objet <code>Pizza</code> possedant la méthode <code>addIngredient()</code>
-                    utiliser cette méthode pour ajouter les ingrediants présent en session a la pizza.
-
+                    Le script <em>consultPizza.php</em> crée une instance de l'objet <code>Pizza</code> possedant la méthode <code>addIngredient($ingredient)</code> utiliser cette méthode pour ajouter les ingrediants présent en session a la pizza.
                 </p>
             </article>
         </section>
@@ -231,6 +199,15 @@ public function __unserialize(array $data): void
                         <li>4/ Modifier également le script <em>editIngredient.php</em> pour insérer les données validées du formulaire dans la table <strong>Ingredient</strong> de votre base de données en utilisant la méthode <strong>insertIngredient()</strong> de la classe DB. La session ne sera donc plus utilisée. Vous pourrez récupérer le paramètre <strong>idPizza</strong> via la méthode GET</li>
                     </ul>
                 </div>
+            </article>
+            <article class="col-12">
+                Avant de rendre votre projet, merci de modifier la connexion a la base de données :
+                <ul>
+                    <li>URL : 127.0.0.1</li>
+                    <li>Login : pizza</li>
+                    <li>dbname : postgres</li>
+                    <li>Mot de passe : Hawaienne</li>
+                </ul>
             </article>
         </section>
     </main>

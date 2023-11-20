@@ -37,6 +37,7 @@ function afficherPizza(Pizza $pizza, array $ingredients= []):String
             '</li>';
           }
       $s.='</ul>
+        <a href="editIngredient.php?idPizza='.$pizza->getId().'" class="btn btn-primary btn-sm">Ajouter un ingrédient</a>
         <h3 class="mt-5">Recette:</h3><p>'.$pizza->getRecipeText().'</p>
     </div>
     <div class="card-footer">
