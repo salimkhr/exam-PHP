@@ -5,15 +5,15 @@ class Pizza {
     private ?string $description; // Description de la pizza (chaîne de caractères ou null)
     private float $price;       // Prix de la pizza (nombre à virgule flottante)
     private ?string $recipeText;  // Texte de la recette de la pizza (chaîne de caractères ou null)
-    private ?string $category;  // Texte de la catégorie à laquelle la pizza appartient (chaîne de caractères) géré en base de données via la table Category
+    private ?Category $category;  // Texte de la catégorie à laquelle la pizza appartient (chaîne de caractères) géré en base de données via la table Category
 
-    public function __construct(int $id,string $name, ?string $description, float $price, ?string $recipeText, string $category) {
+    public function __construct(int $id,string $name, ?string $description, float $price, ?string $recipeText) {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
         $this->price = $price;
         $this->recipeText = $recipeText;
-        $this->category = $category;
+        $this->category = null;
     }
 
     public function getId(): int {
@@ -48,11 +48,11 @@ class Pizza {
         $this->recipeText = $recipeText;
     }
 
-    public function getCategory(): string {
+    public function getCategory(): ?Category {
         return $this->category;
     }
 
-    public function setCategory(string $category): void {
+    public function setCategory(?Category $category): void {
         $this->category = $category;
     }
 }

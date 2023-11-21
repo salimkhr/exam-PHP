@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap.min.css" rel="stylesheet">
     <title>Contrôle de TP</title>
 </head>
 <body>
@@ -35,10 +35,8 @@
                     éventuel ancien contenu. A la fin de la séance nous récupérerons automatiquement le contenu complet de votre dossier d’examen.
                 </p>
                 <p>
-                    Vos fichiers devront être répartis dans plusieurs dossiers que vous archiverez (un dossier => une archive <strong>zip</strong>).<br/>
-                    Chaque dossier devra comporter tous les fichiers nécessaires à
-                    l'exécution de cette/ces partie(s), indépendamment des autres parties (même si
-                    certains fichiers devront être copiés à l'identique). Les dossiers sont les suivants :
+                    Vos fichiers devront être répartis dans plusieurs dossiers que vous archiverez dans un fichier <strong>zip</strong>).<br/>
+                    Chaque dossier devra comporter tous les fichiers nécessaires à l'exécution de cette/ces partie(s), indépendamment des autres parties (même si certains fichiers devront être copiés à l'identique). Les dossiers sont les suivants : PartieAB et PartieC
                 <p>
             </article>
             <article class="col-12">
@@ -61,16 +59,12 @@
             <article class="col-12">
                 <span class="h4">Résumé du sujet : </span>
                 <p>L'objectif de cet exercice est de mettre en place un système de gestion des ingrédients pour des recettes de pizza à l'aide d'un formulaire de saisie.</p>
-                <p>Dans la partie A, les ingrédients (un ou plusieurs) seront gérés et stockés sous forme d'objets instances d'une classe <strong>Ingredient</strong> définie dans le fichier <em>ingredient.inc.php</em>. Cette classe sera responsable de stocker toutes les informations liées à un ingrédient, telles que son nom, sa quantité, et d'autres caractéristiques.</p>
-                <p>La partie B du projet consiste à développer des fonctionnalités pour créer des recettes de pizza en utilisant les ingrédients gérés dans la partie A. Les étudiants devront créer une page d'édition <em>editPizza.php</em> pour permettre la création de nouvelles recettes de pizza en ajoutant les ingrédients appropriés</p>
-                <p>Enfin, dans la partie C, les étudiants devront intégrer une base de données PostgreSQL pour stocker de manière permanente les recettes de pizza ainsi que les détails des ingrédients. Cette base de données permettra une gestion plus efficace des recettes de pizza et de leurs composants.</p>
+                <p>Dans la partie A, les ingrédients seront gérés et stockés sous forme d'objets instances d'une classe <strong>Ingredient</strong> définie dans le fichier <em>ingredient.inc.php</em>. Cette classe sera responsable de stocker toutes les informations liées à un ingrédient, telles que son nom, sa quantité, et d'autres caractéristiques.</p>
+                <p>La partie B du projet consiste à développer des fonctionnalités pour créer des recettes de pizza en utilisant les ingrédients gérés dans la partie A. Vous devrez, via les sessions, permettre la création de nouvelles recettes de pizza en ajoutant les ingrédients appropriés</p>
+                <p>Enfin, dans la partie C, vous devrez intégrer une base de données PostgreSQL pour stocker de manière permanente les recettes de pizza ainsi que les détails des ingrédients. Cette base de données permettra une gestion plus efficace des recettes de pizza et de leurs composants.</p>
                 <div class="col-12">
                     <p>
-                        Les différentes pages à réaliser comporteront la structure déjà vue en TP en trois parties
-                        (fonctions PHP) : <code>entete()</code>, <code>contenu()</code>, et <code>pied()</code>. Les éléments d'entête
-                        et pied de page seront disponibles grace à deux fonctions présentes
-                        dans le fichier de fonctions auxiliaires <em>fctAux.inc.php </em>fourni dans cette archive :
-                        <a href="src.zip">scr.zip</a> (qui comporte aussi l'image du bandeau et la feuille de style <strong>site.css</strong>).
+                        Les différentes pages à réaliser comporteront la structure déjà vue en TP en trois parties (fonctions PHP) : <code>entete()</code> et <code>pied()</code>. Les éléments d'entête et pied de page seront disponibles grace à deux fonctions présentes dans le fichier de fonctions auxiliaires <em>fctAux.inc.php </em>fourni dans cette archive : <a href="src.zip">scr.zip</a> (qui comporte aussi les images,la feuille de style <strong>site.css</strong> et autres ressources).
                     </p>
                 </div>
             </article>
@@ -79,9 +73,9 @@
         <!-- Partie A -->
         <section class="row">
             <article class="col-12">
-                <h2>Partie A : <span class="h3">Formulaire de création (8 points).</span></h2>
+                <h2>Partie A : <span class="h3">Création des ingrédients (8 points).</span></h2>
                 <p>
-                    Dans cette partie, il s'agit de modifier le script <em>editIngredient.php</em> qui génère et affiche un formulaire de création d'un ingrédient.
+                    Dans cette partie, il s'agit de modifier le script <em>editIngredient.php</em> afin qu'il affiche et traite un formulaire de création d'un ingrédient.
                 </p>
                 <p>Le formulaire est constitué des champs suivants :</p>
                 <div class="ms-5">
@@ -204,8 +198,8 @@ public function __unserialize(array $data): void
                 Avant de rendre votre projet, merci de modifier la connexion a la base de données :
                 <ul>
                     <li>URL : 127.0.0.1</li>
-                    <li>Login : pizza</li>
                     <li>dbname : postgres</li>
+                    <li>Login : pizza</li>
                     <li>Mot de passe : Hawaienne</li>
                 </ul>
             </article>
