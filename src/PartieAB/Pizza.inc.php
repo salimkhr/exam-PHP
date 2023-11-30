@@ -1,5 +1,7 @@
 <?php
-class Pizza {
+
+class Pizza
+{
     private int $id;          // Identifiant de la pizza (entier)
     private string $name;        // Nom de la pizza (chaîne de caractères)
     private ?string $description; // Description de la pizza (chaîne de caractères ou null)
@@ -7,7 +9,8 @@ class Pizza {
     private ?string $recipeText;  // Texte de la recette de la pizza (chaîne de caractères ou null)
     private ?Category $category;  // Identifiant de la catégorie à laquelle la pizza appartient (entier)
 
-    public function __construct(int $id,string $name, ?string $description, float $price, ?string $recipeText) {
+    public function __construct(int $id, string $name, ?string $description, float $price, ?string $recipeText)
+    {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
@@ -16,43 +19,53 @@ class Pizza {
         $this->category = null;
     }
 
-    public function getId(): int {
+    public function getId(): int
+    {
         return $this->id;
     }
 
-    public function getName(): string {
+    public function getName(): string
+    {
         return $this->name;
     }
 
-    public function getDescription(): ?string {
+    public function getDescription(): ?string
+    {
         return $this->description;
     }
 
-    public function setDescription(?string $description): void {
+    public function setDescription(?string $description): void
+    {
         $this->description = $description;
     }
 
-    public function getPrice(): float {
+    public function getPrice(): float
+    {
         return $this->price;
     }
 
-    public function setPrice(float $price): void {
+    public function setPrice(float $price): void
+    {
         $this->price = $price;
     }
 
-    public function getRecipeText(): ?string {
+    public function getRecipeText(): ?string
+    {
         return $this->recipeText;
     }
 
-    public function setRecipeText(?string $recipeText): void {
+    public function setRecipeText(?string $recipeText): void
+    {
         $this->recipeText = $recipeText;
     }
 
-    public function getCategory(): ?Category {
+    public function getCategory(): ?Category
+    {
         return $this->category;
     }
 
-    public function setCategory(?Category $category): void {
+    public function setCategory(?Category $category): void
+    {
         $this->category = $category;
     }
 }

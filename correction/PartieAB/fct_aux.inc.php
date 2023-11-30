@@ -1,40 +1,45 @@
 <?php
+
 /* fctAux.inc.php */
 
 // ------------------------------------
 // FONCTIONS AUXILIAIRES DE SORTIE HTML
 // ------------------------------------
 
-function enTete($titre='') {
-  return
-  '<!DOCTYPE html>
+function enTete($titre = '')
+{
+    return
+    '<!DOCTYPE html>
     <html lang="fr">
       <head>
         <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>'.$titre.'</title>
+        <title>' . $titre . '</title>
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
       </head>
-      <body>'.
-  menu().
-  haut();
+      <body>' .
+    menu() .
+    haut();
 }
 
-function pied() {
-  //MODIF 1617
-  return '</div>
+function pied()
+{
+    // MODIF 1617
+    return '</div>
 
           </body>
           </html>';
 }
 
 /* Ajout pour l'en-tete et le menu */
-function haut() {
-  return '<div class="container mt-5">';
+function haut()
+{
+    return '<div class="container mt-5">';
 }
 
-function menu() {
-  return '<nav class="navbar navbar-expand-lg bg-light">
+function menu()
+{
+    return '<nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Pizza-Shop</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,4 +61,3 @@ function menu() {
   </div>
 </nav>';
 }
-?>

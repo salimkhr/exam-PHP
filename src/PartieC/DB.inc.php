@@ -1,63 +1,71 @@
 <?php
 
-Include 'Category.inc.php';
-Include 'Pizza.inc.php';
-Include 'Ingredient.inc.php';
+include 'Category.inc.php';
+include 'Pizza.inc.php';
+include 'Ingredient.inc.php';
 
-class DB {
-    private static $instance = null; //mémorisation de l'instance de DB pour appliquer le pattern Singleton
-    private $connect=null; //connexion PDO à la base
+class DB
+{
+    private static $instance = null; // mémorisation de l'instance de DB pour appliquer le pattern Singleton
+    private $connect = null; // connexion PDO à la base
 
-    /************************************************************************/
     //	Constructeur gerant  la connexion à la base via PDO
     //	NB : il est non utilisable a l'exterieur de la classe DB
-    /************************************************************************/
-    private function __construct() {
+
+    private function __construct()
+    {
         // Connexion à la base de données
         $connStr = 'pgsql:host=localhost port=5432 dbname=postgres'; // A MODIFIER !
-        try {
+        try
+        {
             // Connexion à la base
-            $this->connect = new PDO($connStr, 'pizza', 'Hawaienne'); //A MODIFIER !
+            $this->connect = new PDO($connStr, 'pizza', 'Hawaienne'); // A MODIFIER !
             // Configuration facultative de la connexion
             $this->connect->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
-            $this->connect->setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION);
+            $this->connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
-        catch (PDOException $e) {
-            echo "probleme de connexion :".$e->getMessage();
-            return null;
+        catch (PDOException $e)
+        {
+            echo 'probleme de connexion :' . $e->getMessage();
+
+            return;
         }
     }
 
-    /************************************************************************/
     //	Methode permettant d'obtenir un objet instance de DB
     //	NB : cet objet est unique pour l'exécution d'un même script PHP
     //	NB2: c'est une methode de classe.
-    /************************************************************************/
-    public static function getInstance() {
-        if (is_null(self::$instance)) {
-            try {
-                self::$instance = new DB();
+
+    public static function getInstance()
+    {
+        if (null === self::$instance)
+        {
+            try
+            {
+                self::$instance = new self();
             }
-            catch (PDOException $e) {
+            catch (PDOException $e)
+            {
                 echo $e;
             }
-        } //fin IF
+        } // fin IF
         $obj = self::$instance;
 
-        if (($obj->connect) == null) {
-            self::$instance=null;
+        if (null === $obj->connect)
+        {
+            self::$instance = null;
         }
-        return self::$instance;
-    } //fin getInstance
 
-    /************************************************************************/
+        return self::$instance;
+    } // fin getInstance
+
     //	Methode permettant de fermer la connexion a la base de données
-    /************************************************************************/
-    public function close() {
+
+    public function close()
+    {
         $this->connect = null;
     }
 
-    /************************************************************************/
     //	Methode uniquement utilisable dans les méthodes de la class DB
     //	permettant d'exécuter n'importe quelle requête SQL
     //	et renvoyant en résultat les tuples renvoyés par la requête
@@ -72,34 +80,39 @@ class DB {
     //	ATTENTION : il doit y avoir autant de ? dans le texte de la requête
     //	que d'éléments dans le tableau passé en second paramètre.
     //	NB : si la requête ne renvoie aucun tuple alors la fonction renvoie un tableau vide
-    /************************************************************************/
-    private function execQuery($requete,$tparam,$nomClasse) {
-        //on prépare la requête
+
+    private function execQuery($requete, $tparam, $nomClasse)
+    {
+        // on prépare la requête
         $stmt = $this->connect->prepare($requete);
-        //on indique que l'on va récupére les tuples sous forme d'objets instance de Client
-        $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, $nomClasse);
-        //on exécute la requête
-        if ($tparam != null) {
+        // on indique que l'on va récupére les tuples sous forme d'objets instance de Client
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $nomClasse);
+        // on exécute la requête
+        if (null !== $tparam)
+        {
             $stmt->execute($tparam);
         }
-        else {
+        else
+        {
             $stmt->execute();
         }
-        //récupération du résultat de la requête sous forme d'un tableau d'objets
-        $tab = array();
-        $tuple = $stmt->fetch(); //on récupère le premier tuple sous forme d'objet
-        if ($tuple) {
-            //au moins un tuple a été renvoyé
-            while ($tuple != false) {
-                $tab[]=$tuple; //on ajoute l'objet en fin de tableau
-                $tuple = $stmt->fetch(); //on récupère un tuple sous la forme
-                //d'un objet instance de la classe $nomClasse
-            } //fin du while
+        // récupération du résultat de la requête sous forme d'un tableau d'objets
+        $tab = [];
+        $tuple = $stmt->fetch(); // on récupère le premier tuple sous forme d'objet
+        if ($tuple)
+        {
+            // au moins un tuple a été renvoyé
+            while (false !== $tuple)
+            {
+                $tab[] = $tuple; // on ajoute l'objet en fin de tableau
+                $tuple = $stmt->fetch(); // on récupère un tuple sous la forme
+                // d'un objet instance de la classe $nomClasse
+            } // fin du while
         }
+
         return $tab;
     }
 
-    /************************************************************************/
     //	Methode utilisable uniquement dans les méthodes de la classe DB
     //	permettant d'exécuter n'importe quel ordre SQL (update, delete ou insert)
     //	autre qu'une requête.
@@ -108,26 +121,29 @@ class DB {
     //	param2 : tableau des valeurs permettant d'instancier les paramètres de l'ordre SQL
     //	ATTENTION : il doit y avoir autant de ? dans le texte de la requête
     //	que d'éléments dans le tableau passé en second paramètre.
-    /************************************************************************/
-    private function execMaj($ordreSQL,$tparam) {
+
+    private function execMaj($ordreSQL, $tparam)
+    {
         $stmt = $this->connect->prepare($ordreSQL);
-        $res = $stmt->execute($tparam); //execution de l'ordre SQL
+        $res = $stmt->execute($tparam); // execution de l'ordre SQL
+
         return $stmt->rowCount();
     }
 
-    /*************************************************************************
+    /*
      * Fonctions qui peuvent être utilisées dans les scripts PHP
-     *************************************************************************/
-    public function getPizzas():array {
+     */
+    public function getPizzas(): array
+    {
         $requete = 'select p.*,c."name" as category from pizza p join Category c on c.id = p.idcategory';
-        return $this->execQuery($requete,null,'Pizza');
+
+        return $this->execQuery($requete, null, 'Pizza');
     }
 
-    public function getCategoryById(int $id):array {
+    public function getCategoryById(int $id): array
+    {
         $requete = 'select * from Category c where c.id = ?';
-        return $this->execQuery($requete,[$id],'Category');
+
+        return $this->execQuery($requete, [$id], 'Category');
     }
-
-} //fin classe DB
-
-?>
+} // fin classe DB

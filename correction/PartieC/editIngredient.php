@@ -3,6 +3,7 @@
 session_start();
 include 'fct_aux.inc.php';
 include 'Ingredient.inc.php';
+include 'DB.inc.php';
 
 if (isset($_POST['name']))
 {
@@ -26,20 +27,14 @@ function exploiterFormulaire($data)
         header('Location: editIngredient.php');
     }
 
-    $ingredient = new Ingredient($name, $qte, $unite, 1);
+    DB::getInstance()->insertIngredient($name, $qte, $unite, $_GET['idPizza']);
 
-    if (!isset($_SESSION['ingredient']))
-    {
-        $_SESSION['ingredient'] = [];
-    }
-
-    $_SESSION['ingredient'][] = serialize($ingredient);
     header('Location: consultPizza.php');
 }
 
 function genererFormulaire()
 {
-    return '<form method="post">
+    return '<form method="post" action="editIngredient.php?idPizza=' . $_GET['idPizza'] . '">
 
       <label for="name" class="form-label">Nom de l\'ingrédient :<span class="text-danger">*</span></label>
       <input type="text" name="name" class="form-control" required>
